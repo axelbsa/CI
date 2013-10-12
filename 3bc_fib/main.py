@@ -1,9 +1,9 @@
-import time
+import time,sys
 
-try: import numpy;found_numpy = True
-except: found_numpy = False
+try: import numpy
+except: print "please install numpy"; sys.exit(-1)
 
-n = 1200
+n = 120000
 
 def fib_numpy(n,vector):
     vector[0] = vector[1] = 1
@@ -14,14 +14,10 @@ def fib_numpy(n,vector):
 
 if __name__ == "__main__":
 
-    if found_numpy:
-        start_tick = time.time()
-        vector = numpy.zeros(n)
-        fib_numpy(n, vector)
-        print vector[len(vector)-1]
-        print "-----------------------------------------------------"
-        print "\r\r Total time: %s sec" % (time.time() - start_tick)
-    else:
-        # Do it some other way
-        pass
+    start_tick = time.time()
+    vector = numpy.zeros(n)
+    fib_numpy(n, vector)
+    print vector[len(vector)-1]
+    print "-----------------------------------------------------"
+    print "\r\r Total time: %s sec" % (time.time() - start_tick)
 
