@@ -8,7 +8,7 @@ n = 120000
 def fib_numpy(n,vector):
     vector[0] = vector[1] = 1
     for index in range(2,n):
-        print index
+        print >> sys.stderr, index
         vector[index] = vector[index-1] + vector[index-2]
     return vector[n-1]
 
