@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Plotting some things</title>
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <!-- <script type="text/javascript" src="d3/d3.v3.js"></script> -->
+        <script src="{{ url_for('static', filename='jquery-1.10.1.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='highcharts.js') }}"></script>
+        <!-- <script type="text/javascript" src="{{ url_for('static', filename='common.js') }}"></script> -->
+        <!-- Takes for ever to load this js! -->
+        <script>
+
+            $(function () {
+                $('#plotSection').highcharts({
+                    chart: {
+                        type: 'column',
+                        margin: [ 50, 50, 100, 80]
+                    },
+                    title: {
+                        text: 'Top 20 words'
+                    },
+                    xAxis: {
+                        categories: [ 
+                            {% for k in key %}
+                                '{{ k }}',
+                            {% endfor %}
+                            
+                            ],
+                        labels: {
+                            rotation: -45,
+                            align: 'right',
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Numer of words'
+                        }
+                    },
+                    legend: {
+                        enabled: false
+                    },
+                    tooltip: {
+                        pointFormat: 'UpdateMe <b>{point.y:.1f} millions</b>',
+                    },
+                    series: [{
+                        name: 'Population',
+                        //data: [34.4, 21.8, 20.1, 20, 19.6, 19.5, 19.1, 18.4, 18,17.3, 16.8, 15, 14.7, 14.5, 13.3, 12.8, 12.4, 11.8, 11.7, 11.2],
+                        data: [
+                            {% for v in value %}
+                                {{ v }},
+                            {% endfor %}
+                            ],
+                        dataLabels: {
+                            enabled: true,
+                            rotation: -90,
+                            color: '#FFFFFF',
+                            align: 'right',
+                            x: 4,
+                            y: 10,
+                            style: {
+                                fontSize: '13px',
+                                fontFamily: 'Verdana, sans-serif',
+                                textShadow: '0 0 3px black'
+                            }
+                        }
+                    }]
+                });
+            });
+            </script>
+
+
+    </head>
+    <body>
+        <div id="mainSection">
+            <div id="topSection">
+                <div id="uploadSection" style="">
+                    <h1>Upload new File</h1>
+                    <form action="/ci" method=post enctype=multipart/form-data>
+                        <p><input type=file name=file>
+                        <input type=submit value=Upload>
+                    </form>
+                </div>
+
+                <div id="fileSection" style="margin-left:20px">
+                    <tr>
+                    {% for file in f_all %}
+                    <td><a href="/ci/uploads/{{file}}">{{file}}</a></td><br />
+                    {% endfor %}
+                    </tr>
+                    
+                </div>
+            </div>
+            <hr>
+            <div id="plotSection">
+            <script type="text/javascript">
+                // d3 code
+            </script>
+            </div>
+        </div>
+
+    </body>
+</html>
+

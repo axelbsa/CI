@@ -1,0 +1,24 @@
+
+
+body {
+
+
+}
+
+#uploadSection {
+    float: right;
+    height: auto;
+    padding-right: 12 px;
+}
+
+#filesection {
+
+}
+
+#mainSection{
+    margin-top: 130px;
+    margin-left: auto; 
+    margin-right: auto;
+    width:960px;
+}
+
