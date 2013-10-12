@@ -7,8 +7,6 @@ from werkzeug import secure_filename
 from flask import Flask, request, session, g, \
         redirect, url_for, abort, render_template, flash, send_from_directory
 
-from path import *
-
 app = Flask(__name__)
 app.config.from_object('config')
 cache = MemcachedCache(['127.0.0.1:11211'])
@@ -54,14 +52,6 @@ def uploaded_file(filename):
 def render_main(**kwargs):
     print "Entering render_main"
     return render_template('index.html', f_all = files)
-
-@app.route('/d3_test')
-def render_graph():
-    return render_template('d3_test.html')
-
-@app.route('/plot')
-def render_graph_plot():
-    return render_template('d3_test.html')
 
 @app.route('/ci', methods=['GET', 'POST'])
 def upload_file():
