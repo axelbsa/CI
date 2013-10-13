@@ -25,11 +25,9 @@ def getUniqeWords(filename):
     print "Entering getUnqiqeWords"
     try:
         for line in open ('uploads/'+filename, 'r'):
-            c.update(line.split())
-    
+            c.update(line.lower().split()) 
     except IOError as e:
         print "I/O error({0}): {1} {2}".format(e.errno, e.strerror,os.getcwd())
-    
     return c.most_common(app.config['TOP_MAX'])
 
 def allowed_file(filename):
@@ -42,7 +40,7 @@ def uploaded_file(filename):
     data_set = cache.get(filename)
     if data_set == None:
         data_set = getUniqeWords(filename)
-        cache.set(filename, data_set, timeout=5 * 60)
+        cache.set(filename, data_set, timeout=1)
     key, value = zip(*data_set)
     print '\', \''.join(key)
     files = get_files_dir(app.config['UPLOAD_FOLDER'])
