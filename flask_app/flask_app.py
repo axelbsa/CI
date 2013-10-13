@@ -25,7 +25,7 @@ def getUniqeWords(filename):
     print "Entering getUnqiqeWords"
     try:
         for line in open ('uploads/'+filename, 'r'):
-            c.update(line.lower().split()) 
+            c.update(list(set(line.lower().split()) - set(app.config['ILLIGAL_WORDS']) ))
     except IOError as e:
         print "I/O error({0}): {1} {2}".format(e.errno, e.strerror,os.getcwd())
     return c.most_common(app.config['TOP_MAX'])
@@ -35,10 +35,10 @@ def allowed_file(filename):
 
 @app.route('/ci/uploads/<filename>')
 def uploaded_file(filename):
-    print "Entering uploaded_file: " + filename 
-
     data_set = cache.get(filename)
+    print "Entering uploads, '%s'" % (filename)
     if data_set == None:
+        print "Did not find item in cahce"
         data_set = getUniqeWords(filename)
         cache.set(filename, data_set, timeout=1)
     key, value = zip(*data_set)
@@ -48,7 +48,6 @@ def uploaded_file(filename):
 
 @app.route('/main')
 def render_main(**kwargs):
-    print "Entering render_main"
     return render_template('index.html', f_all = files)
 
 @app.route('/ci', methods=['GET', 'POST'])
@@ -64,9 +63,11 @@ def upload_file():
                 pass
 
             #return redirect(url_for('uploaded_file',filename=filename))
-    
+
     files = get_files_dir(app.config['UPLOAD_FOLDER'])
+    #getUniqeWords(filename)
     return render_template('index.html', f_all = files)
+
 
 @app.route('/')
 def render_start():
