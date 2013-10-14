@@ -5,7 +5,6 @@ try: import numpy; f_n = True
 except: f_n = False
 
 n = 1200
-f_n = False
 
 def memo(f):
     cache = {}
