@@ -2,7 +2,7 @@ import time,sys
 sys.setrecursionlimit(100000)
 
 try: import numpy; f_n = True
-except: f_n = False;print "please install numpy"; sys.exit(-1)
+except: f_n = False
 
 n = 1200
 f_n = False
