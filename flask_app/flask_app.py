@@ -40,7 +40,7 @@ def uploaded_file(filename):
     if data_set == None:
         print "Did not find item in cahce"
         data_set = getUniqeWords(filename)
-        cache.set(filename, data_set, timeout=1)
+        cache.set(filename, data_set, timeout=3600 * 24 )
     key, value = zip(*data_set)
     print '\', \''.join(key)
     files = get_files_dir(app.config['UPLOAD_FOLDER'])
