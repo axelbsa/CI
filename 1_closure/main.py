@@ -18,3 +18,5 @@ def outside_func(x):
     print inside_func(x)
 
 outside_func(5)
+
+
