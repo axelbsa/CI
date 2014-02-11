@@ -1,3 +1,5 @@
+# Inserting random comment, needd"#¤"#¤ a little more comment 
+
 def pow(num, power):
     sum_q = 1.0
     if power < 0:
