@@ -11,8 +11,13 @@ def pow(num, power):
         sum_q *= num
     return sum_q
 
+def rec(n,x):
+    if x == 0: 
+        return 1
+    if x < 0:
+        return 1.0/(n*rec(n,(-1*x)-1.0))
+    if x > 0:                           
+        return n*rec(n,x-1)
+
 if __name__ == "__main__":
     print pow(2.0,8.0)
-
-
-    #NEED CHANGE
